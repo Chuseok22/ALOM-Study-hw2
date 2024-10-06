@@ -43,6 +43,7 @@ public class PostService {
     }
 
     public Post findPostById(Long id) {
+        Objects.requireNonNull(id, "id 값이 null일 수 없습니다.");
         return postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
     }
