@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class PostService {
@@ -30,5 +31,25 @@ public class PostService {
         newpost.setCreatedAt(LocalDateTime.now());
 
         return newpost;
+    }
+
+    public List<Post> findAll(){
+        return postRepository.findAll();
+    }
+
+    public Post findById(Long id){
+        return postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+    }
+
+    public Post findByTitle(String title){
+        return postRepository.findByTitle(title)
+                .orElseThrow(()-> new IllegalArgumentException("해당 제목을 가진 글이 존재하지 않습니다."));
+
+    }
+
+    public Post findByWriter(String writer){
+        return postRepository.findByTitle(writer)
+                .orElseThrow(()-> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
     }
 }
