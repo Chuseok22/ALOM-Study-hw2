@@ -2,7 +2,6 @@ package com.example.springhw2.service;
 
 import com.example.springhw2.entity.Post;
 import com.example.springhw2.repository.PostRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
