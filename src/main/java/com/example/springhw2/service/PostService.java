@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PostService {
@@ -34,22 +35,22 @@ public class PostService {
         return postRepository.save(newpost);
     }
 
-    public List<Post> findAll() {
+    public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
 
-    public Post findById(Long id) {
+    public Post findPostById(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
     }
 
-    public Post findByTitle(String title) {
+    public Post findPostByTitle(String title) {
         return postRepository.findByTitle(title)
                 .orElseThrow(() -> new IllegalArgumentException("해당 제목을 가진 글이 존재하지 않습니다."));
 
     }
 
-    public Post findByWriter(String writer) {
+    public Post findPostByWriter(String writer) {
         return postRepository.findByWriter(writer)
                 .orElseThrow(() -> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
     }
@@ -57,6 +58,10 @@ public class PostService {
     public Post updatePost(Long id, String title, String content) {
         Post updatePost = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+
+        if (title.equals(updatePost.getTitle()) || content.equals(updatePost.getContent())) {
+            throw new IllegalStateException("업데이트할 내용이 없습니다.");
+        }
 
         updatePost.setTitle(title);
         updatePost.setContent(content);

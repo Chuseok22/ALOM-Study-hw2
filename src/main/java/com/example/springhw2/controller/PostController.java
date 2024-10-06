@@ -32,23 +32,23 @@ public class PostController {
     }
 
     @GetMapping("/post")
-    public List<Post> findAll() {
-        return postService.findAll();
+    public List<Post> getAllPosts() {
+        return postService.getAllPosts();
     }
 
     @GetMapping("/post/id/{id}")
-    public Post findById(@PathVariable("id") Long id) {
-        return postService.findById(id);
+    public Post findPostById(@PathVariable("id") Long id) {
+        return postService.findPostById(id);
     }
 
     @GetMapping("/post/title/{title}")
-    public Post findByTitle(@PathVariable("title") String title) {
-        return postService.findByTitle(title);
+    public Post findPostByTitle(@PathVariable("title") String title) {
+        return postService.findPostByTitle(title);
     }
 
     @GetMapping("/post/writer/{writer}")
-    public Post findByWriter(@PathVariable("writer") String writer) {
-        return postService.findByWriter(writer);
+    public Post findPostByWriter(@PathVariable("writer") String writer) {
+        return postService.findPostByWriter(writer);
     }
 
     @PutMapping("/post/{id}")
