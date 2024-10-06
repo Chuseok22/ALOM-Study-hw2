@@ -1,4 +1,34 @@
 package com.example.springhw2.service;
 
+import com.example.springhw2.entity.Post;
+import com.example.springhw2.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+
+@Service
 public class PostService {
+
+    private final PostRepository postRepository;
+
+    @Autowired
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
+    public Post createPost(String title, String content, String writer){
+        if(title.isBlank() || content.isBlank()){
+            throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
+        }
+
+        Post newpost = new Post();
+        newpost.setTitle(title);
+        newpost.setContent(content);
+        newpost.setWriter(writer);
+        newpost.setCreatedAt(LocalDateTime.now());
+        newpost.setCreatedAt(LocalDateTime.now());
+
+        return newpost;
+    }
 }

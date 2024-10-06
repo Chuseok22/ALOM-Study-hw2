@@ -7,14 +7,13 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 public class Post {
-
-    // TODO : 글 제목, 본문, 작성자, 글 작성 시간, 글 수정 시간
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,8 +25,8 @@ public class Post {
 
     private String writer;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
 }
