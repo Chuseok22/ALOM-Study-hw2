@@ -36,7 +36,7 @@ public class PostService {
         return postRepository.save(newpost);
     }
 
-    public List<Post> getAllPosts() {
+    public List<Post> findAllPosts() {
         return postRepository.findAll();
     }
 
@@ -51,9 +51,9 @@ public class PostService {
 
     }
 
-    public Post findPostByWriter(@NonNull String writer) {
+    public List<Post> findPostByWriter(@NonNull String writer) {
         return postRepository.findByWriter(writer)
-                .orElseThrow(() -> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 작성자의 글이 존재하지 않습니다."));
     }
 
     public Post updatePost(@NonNull Long id, @NonNull String title, @NonNull String content) {

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +34,7 @@ public class PostController {
 
     @GetMapping("/post")
     public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+        return postService.findAllPosts();
     }
 
     @GetMapping("/post/id/{id}")
@@ -49,7 +48,7 @@ public class PostController {
     }
 
     @GetMapping("/post/writer/{writer}")
-    public Post findPostByWriter(@PathVariable("writer") String writer) {
+    public List<Post> findPostByWriter(@PathVariable("writer") String writer) {
         return postService.findPostByWriter(writer);
     }
 
