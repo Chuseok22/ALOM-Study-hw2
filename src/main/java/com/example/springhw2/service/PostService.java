@@ -49,7 +49,7 @@ public class PostService {
     }
 
     public Post findByWriter(String writer) {
-        return postRepository.findByTitle(writer)
+        return postRepository.findByWriter(writer)
                 .orElseThrow(() -> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
     }
 
