@@ -20,10 +20,10 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post createPost(@NonNull String title, @NonNull String content, @NonNull String writer) {
+    public Post createPost(String title, String content, String writer) {
 
-        if (title.isBlank() || content.isBlank()) {
-            throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
+        if (title == null || content == null || title.isBlank() || content.isBlank()) {
+            throw new IllegalArgumentException("제목과 본문은 null 이거나 비어있을 수 없습니다.");
         }
 
         Post newpost = new Post();
@@ -41,28 +41,36 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post findPostById(@NonNull Long id) {
+    public Post findPostById(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
     }
 
-    public Post findPostByTitle(@NonNull String title) {
+    public Post findPostByTitle(String title) {
+        if (title == null) {
+            throw new IllegalArgumentException("ID 값이 null 일 수 없습니다.");
+        }
+
         return postRepository.findByTitle(title)
                 .orElseThrow(() -> new NoSuchElementException("해당 제목을 가진 글이 존재하지 않습니다."));
 
     }
 
-    public List<Post> findPostByWriter(@NonNull String writer) {
+    public List<Post> findPostByWriter(String writer) {
+        if (writer  == null) {
+            throw new IllegalArgumentException("ID 값이 null 일 수 없습니다.");
+        }
+
         return postRepository.findByWriter(writer)
                 .orElseThrow(() -> new NoSuchElementException("해당 작성자의 글이 존재하지 않습니다."));
     }
 
-    public Post updatePost(@NonNull Long id, @NonNull String title, @NonNull String content) {
+    public Post updatePost(Long id, String title, String content) {
         Post updatePost = postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
 
-        if (title.isBlank() || content.isBlank()) {
-            throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
+        if (title == null || content == null || title.isBlank() || content.isBlank()) {
+            throw new IllegalArgumentException("제목과 본문은 null 이거나 비어있을 수 없습니다.");
         }
 
         // 변경 사항이 없는 경우
@@ -74,7 +82,7 @@ public class PostService {
         updatePost.setContent(content);
         updatePost.setUpdatedAt(LocalDateTime.now());
 
-        return updatePost;
+        return postRepository.save(updatePost);
     }
 
     public void deletePost(@NonNull Long id) {
