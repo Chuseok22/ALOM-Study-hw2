@@ -79,7 +79,7 @@ public class PostService {
 
     public void deletePost(@NonNull Long id) {
         postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
 
         postRepository.deleteById(id);
     }
