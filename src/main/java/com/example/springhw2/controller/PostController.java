@@ -56,11 +56,11 @@ public class PostController {
                            @RequestParam("title") String title,
                            @RequestParam("content") String content) {
 
-        return postService.updatePost(id,title,content);
+        return postService.updatePost(id, title, content);
     }
 
     @DeleteMapping("/post/{id}")
-    public void deletePost(@PathVariable("id") Long id){
+    public void deletePost(@PathVariable("id") Long id) {
         postService.deletePost(id);
     }
 }
