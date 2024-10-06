@@ -2,6 +2,7 @@ package com.example.springhw2.service;
 
 import com.example.springhw2.entity.Post;
 import com.example.springhw2.repository.PostRepository;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post createPost(String title, String content, String writer) {
+    public Post createPost(@NonNull String title, @NonNull String content, @NonNull String writer) {
 
         if (title.isBlank() || content.isBlank()) {
             throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
@@ -39,23 +40,23 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post findPostById(Long id) {
+    public Post findPostById(@NonNull Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
     }
 
-    public Post findPostByTitle(String title) {
+    public Post findPostByTitle(@NonNull String title) {
         return postRepository.findByTitle(title)
                 .orElseThrow(() -> new IllegalArgumentException("해당 제목을 가진 글이 존재하지 않습니다."));
 
     }
 
-    public Post findPostByWriter(String writer) {
+    public Post findPostByWriter(@NonNull String writer) {
         return postRepository.findByWriter(writer)
                 .orElseThrow(() -> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
     }
 
-    public Post updatePost(Long id, String title, String content) {
+    public Post updatePost(@NonNull Long id, @NonNull String title, @NonNull String content) {
         Post updatePost = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
 
@@ -75,7 +76,7 @@ public class PostService {
         return updatePost;
     }
 
-    public void deletePost(Long id) {
+    public void deletePost(@NonNull Long id) {
         postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
 
