@@ -43,13 +43,13 @@ public class PostService {
     }
 
     public Post findPostById(Long id) {
-        Objects.requireNonNull(id, "id 값이 null일 수 없습니다.");
+        Objects.requireNonNull(id, "id 값이 null 일 수 없습니다.");
         return postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
     }
 
     public Post findPostByTitle(String title) {
-        Objects.requireNonNull(title, "title 값이 null일 수 없습니다.");
+        Objects.requireNonNull(title, "title 값이 null 일 수 없습니다.");
 
         return postRepository.findByTitle(title)
                 .orElseThrow(() -> new NoSuchElementException("해당 제목을 가진 글이 존재하지 않습니다."));
@@ -57,7 +57,7 @@ public class PostService {
     }
 
     public List<Post> findPostByWriter(String writer) {
-        Objects.requireNonNull(writer, "writer 값이 null일 수 없습니다.");
+        Objects.requireNonNull(writer, "writer 값이 null 일 수 없습니다.");
 
         return postRepository.findByWriter(writer)
                 .orElseThrow(() -> new NoSuchElementException("해당 작성자의 글이 존재하지 않습니다."));
