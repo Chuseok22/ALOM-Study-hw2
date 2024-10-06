@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class PostService {
@@ -42,18 +43,18 @@ public class PostService {
 
     public Post findPostById(@NonNull Long id) {
         return postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
     }
 
     public Post findPostByTitle(@NonNull String title) {
         return postRepository.findByTitle(title)
-                .orElseThrow(() -> new IllegalArgumentException("해당 제목을 가진 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new NoSuchElementException("해당 제목을 가진 글이 존재하지 않습니다."));
 
     }
 
     public List<Post> findPostByWriter(@NonNull String writer) {
         return postRepository.findByWriter(writer)
-                .orElseThrow(() -> new IllegalArgumentException("해당 작성자의 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new NoSuchElementException("해당 작성자의 글이 존재하지 않습니다."));
     }
 
     public Post updatePost(@NonNull Long id, @NonNull String title, @NonNull String content) {
