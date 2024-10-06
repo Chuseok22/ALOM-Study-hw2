@@ -64,7 +64,7 @@ public class PostService {
         return updatePost;
     }
 
-    public void deletePost(Long id){
+    public void deletePost(Long id) {
         Post deletePost = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
 
