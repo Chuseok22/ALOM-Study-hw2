@@ -85,7 +85,7 @@ public class PostService {
         return postRepository.save(updatePost);
     }
 
-    public void deletePost(@NonNull Long id) {
+    public void deletePost(Long id) {
         postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
 
