@@ -2,8 +2,6 @@ package com.example.springhw2.controller;
 
 import com.example.springhw2.entity.Post;
 import com.example.springhw2.service.PostService;
-import lombok.Getter;
-import lombok.experimental.PackagePrivate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.plaf.PanelUI;
 import java.util.List;
 
 @RestController
