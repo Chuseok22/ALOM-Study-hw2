@@ -59,7 +59,7 @@ public class PostService {
 
     public Post updatePost(@NonNull Long id, @NonNull String title, @NonNull String content) {
         Post updatePost = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new NoSuchElementException("해당 id를 가진 글이 존재하지 않습니다."));
 
         if (title.isBlank() || content.isBlank()) {
             throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
