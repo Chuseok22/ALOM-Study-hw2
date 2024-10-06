@@ -24,13 +24,14 @@ public class PostService {
         }
 
         Post newpost = new Post();
+
         newpost.setTitle(title);
         newpost.setContent(content);
         newpost.setWriter(writer);
         newpost.setCreatedAt(LocalDateTime.now());
-        newpost.setCreatedAt(LocalDateTime.now());
+        newpost.setUpdatedAt(LocalDateTime.now());
 
-        return newpost;
+        return postRepository.save(newpost);
     }
 
     public List<Post> findAll() {
@@ -59,7 +60,7 @@ public class PostService {
 
         updatePost.setTitle(title);
         updatePost.setContent(content);
-        updatePost.setCreatedAt(LocalDateTime.now());
+        updatePost.setUpdatedAt(LocalDateTime.now());
 
         return updatePost;
     }
