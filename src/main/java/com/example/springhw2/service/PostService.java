@@ -18,8 +18,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post createPost(String title, String content, String writer){
-        if(title.isBlank() || content.isBlank()){
+    public Post createPost(String title, String content, String writer) {
+        if (title.isBlank() || content.isBlank()) {
             throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
         }
 
@@ -33,23 +33,34 @@ public class PostService {
         return newpost;
     }
 
-    public List<Post> findAll(){
+    public List<Post> findAll() {
         return postRepository.findAll();
     }
 
-    public Post findById(Long id){
+    public Post findById(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
     }
 
-    public Post findByTitle(String title){
+    public Post findByTitle(String title) {
         return postRepository.findByTitle(title)
-                .orElseThrow(()-> new IllegalArgumentException("해당 제목을 가진 글이 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 제목을 가진 글이 존재하지 않습니다."));
 
     }
 
-    public Post findByWriter(String writer){
+    public Post findByWriter(String writer) {
         return postRepository.findByTitle(writer)
-                .orElseThrow(()-> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 글 작성자가 존재하지 않습니다."));
+    }
+
+    public Post updatePost(Long id, String title, String content) {
+        Post updatePost = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+
+        updatePost.setTitle(title);
+        updatePost.setContent(content);
+        updatePost.setCreatedAt(LocalDateTime.now());
+
+        return updatePost;
     }
 }
