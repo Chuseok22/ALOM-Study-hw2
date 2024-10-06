@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class PostService {
@@ -58,6 +57,10 @@ public class PostService {
     public Post updatePost(Long id, String title, String content) {
         Post updatePost = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 id를 가진 글이 존재하지 않습니다."));
+
+        if (title.isBlank() || content.isBlank()) {
+            throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
+        }
 
         if (title.equals(updatePost.getTitle()) || content.equals(updatePost.getContent())) {
             throw new IllegalStateException("업데이트할 내용이 없습니다.");
