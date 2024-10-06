@@ -19,6 +19,7 @@ public class PostService {
     }
 
     public Post createPost(String title, String content, String writer) {
+
         if (title.isBlank() || content.isBlank()) {
             throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
         }
@@ -62,7 +63,8 @@ public class PostService {
             throw new IllegalArgumentException("제목과 본문은 비어있을 수 없습니다.");
         }
 
-        if (title.equals(updatePost.getTitle()) || content.equals(updatePost.getContent())) {
+        // 변경 사항이 없는 경우
+        if (title.equals(updatePost.getTitle()) && content.equals(updatePost.getContent())) {
             throw new IllegalStateException("업데이트할 내용이 없습니다.");
         }
 
