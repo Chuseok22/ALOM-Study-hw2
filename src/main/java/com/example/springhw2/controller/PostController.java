@@ -3,6 +3,7 @@ package com.example.springhw2.controller;
 import com.example.springhw2.entity.Post;
 import com.example.springhw2.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class PostController {
     }
     //글 작성
     @PostMapping("")
+    @Transactional
     public Post register(@RequestParam("title") String title,
                          @RequestParam("content")String content,
                          @RequestParam("writer")String writer){
@@ -41,18 +43,18 @@ public class PostController {
     }
     //작성자를 통한 글 조회
     @GetMapping("/writer/{writer}")
-    public Post findPostByWriter(@PathVariable("writer")String writer){
+    public List<Post> findPostByWriter(@PathVariable("writer")String writer){
         return postService.findByPostWriter(writer);
     }
     //글 수정
-    @PutMapping("/post/{id}")
+    @PutMapping("/{id}")
     public Post changePost(@PathVariable("id")Long id,@RequestParam("title")String title,@RequestParam("content")String content){
         return postService.changePost(id,title,content);
 
     }
 
     //글 삭제
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/{id}")
     public String deletePost(@PathVariable("id")Long id){
         postService.deletePost(id);
         return "ok";

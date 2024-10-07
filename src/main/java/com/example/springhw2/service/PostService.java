@@ -18,7 +18,7 @@ public class PostService {
     }
     //게시물 등록
     public Post register(String title,String content,String writer){
-        if(postRepository.findByTitle(title)==null||postRepository.findByContent(content)==null) {
+        if(title==null||content==null) {
             throw new NullPointerException("널입니다");
         }else {
             Post post = new Post();
@@ -36,7 +36,9 @@ public class PostService {
 
     //Id를 통한 조회
     public Post findByPostId(Long Id){
-        return postRepository.findByPostId(Id);
+        return postRepository
+                .findById(Id)
+                .orElseThrow();
     }
 
     //제목을 통한 조회
@@ -44,21 +46,24 @@ public class PostService {
         return postRepository.findByTitle(title);
     }
     //작성자 통한 조회
-    public Post findByPostWriter(String writer){
+    public List<Post> findByPostWriter(String writer){
         return postRepository.findByWriter(writer);
     }
     //글 수정
     public Post changePost(Long id,String title,String content){
-        Post post = postRepository.findByPostId(id);
+        Post post = postRepository
+                .findById(id)
+                .orElseThrow();
         post.setTitle(title);
         post.setContent(content);
         post.setFixedAt(LocalDateTime.now());
+        postRepository.save(post);
         return post;
     }
 
     //글 삭제
     public void deletePost(Long id){
-        Post post = postRepository.findByPostId(id);
+        Post post = postRepository.findById(id).orElseThrow();
         postRepository.delete(post);
 
     }
